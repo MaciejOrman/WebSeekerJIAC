@@ -1,0 +1,52 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+         http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<import resource="classpath:de/dailab/jiactng/agentcore/conf/AgentNode.xml" />
+	<import resource="classpath:de/dailab/jiactng/agentcore/conf/Agent.xml" />
+	<import resource="classpath:de/dailab/jiactng/agentcore/conf/JMSMessaging.xml" />
+	<import resource="classpath:de/dailab/jiactng/rsga/conf/rsga.xml" />
+	<import
+		resource="classpath:de/dailab/jiactng/basicservices/webserver/conf/webserver.xml" />
+
+
+	<bean name="WebSeekerNode" parent="NodeWithJMX">
+		<property name="agentNodeBeans">
+			<list>
+				<ref bean="StandardJMSBroker" />
+				<ref bean="IDirectory" />
+				<ref bean="WebServer" />
+			</list>
+		</property>
+		<property name="agents">
+			<list>
+				<ref bean="RESTfulProviderAgent" /> <!-- Lets making HTTP requests to WebServer -->
+				<ref bean="SearchInFarooAgent" />
+			</list>
+		</property>
+	</bean>
+
+	<bean name="WebAppBean" class="de.dailab.jiactng.rsga.beans.WebAppServingBean"
+		scope="prototype">
+		<property name="contextPath" value="/webapp" />
+		<property name="resourcePath" value="webapp" />
+	</bean> <!-- This Bean is responsible for placing htmls and js' on WebServer -->
+
+
+	<bean name="SearchInFarooAgent" parent="SimpleAgent">
+		<property name="agentBeans">
+			<list>
+				<ref bean="SearchInFarooBean" />
+				<ref bean="WebAppBean" />
+			</list>
+		</property>
+	</bean>
+
+	<bean name="SearchInFarooBean" class="webseeker.faroo.SearchInFarooBean">
+		<property name="executionInterval" value="4000" />
+		<property name="logLevel" value="INFO" />
+	</bean>
+
+
+</beans>
