@@ -1,6 +1,7 @@
 package webseeker.main;
 
-import webseeker.JIAC.NodeStarter;
+import webseeker.jiac.NodeStarter;
+import webseeker.rating.DynamicAgentsCreation;
 
 
 
@@ -12,6 +13,9 @@ public class StartWebSeeker {
 				"webSeeker.xml",
 				"WebSeekerNode",
 				5000);
+		
 	}
+	
+	
 
 }

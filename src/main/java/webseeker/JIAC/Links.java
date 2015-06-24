@@ -1,4 +1,4 @@
-package webseeker.JIAC;
+package webseeker.jiac;
 
 import java.util.List;
 
@@ -29,9 +29,5 @@ public class Links implements IFact {
 	public String toString() {
 		return "Links [links=" + links + "]";
 	}
-	
-	
-
-
 	
 }

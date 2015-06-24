@@ -7,8 +7,7 @@
 	<import resource="classpath:de/dailab/jiactng/agentcore/conf/Agent.xml" />
 	<import resource="classpath:de/dailab/jiactng/agentcore/conf/JMSMessaging.xml" />
 	<import resource="classpath:de/dailab/jiactng/rsga/conf/rsga.xml" />
-	<import
-		resource="classpath:de/dailab/jiactng/basicservices/webserver/conf/webserver.xml" />
+	<import resource="webserver.xml" />
 
 
 	<bean name="WebSeekerNode" parent="NodeWithJMX">
@@ -23,17 +22,15 @@
 			<list>
 				<ref bean="RESTfulProviderAgent" /> <!-- Lets making HTTP requests to WebServer -->
 				<ref bean="SearchInFarooAgent" />
+				<!-- <ref bean="maciek"/> -->
+				<ref bean="CollaborativeSearchAgent"/>
 			</list>
 		</property>
 	</bean>
 
-	<bean name="WebAppBean" class="de.dailab.jiactng.rsga.beans.WebAppServingBean"
-		scope="prototype">
-		<property name="contextPath" value="/webapp" />
-		<property name="resourcePath" value="webapp" />
-	</bean> <!-- This Bean is responsible for placing htmls and js' on WebServer -->
 
 
+	<!--FAROO SEARCH AGENT  -->
 	<bean name="SearchInFarooAgent" parent="SimpleAgent">
 		<property name="agentBeans">
 			<list>
@@ -42,11 +39,49 @@
 			</list>
 		</property>
 	</bean>
-
 	<bean name="SearchInFarooBean" class="webseeker.faroo.SearchInFarooBean">
 		<property name="executionInterval" value="4000" />
 		<property name="logLevel" value="INFO" />
 	</bean>
-
+	
+	<!--COLLABORATIVE SEARCH AGENT  -->
+	<bean name="CollaborativeSearchAgent" parent="NonBlockingAgent">
+		<property name="agentBeans">
+			<list>
+				<ref bean="CollaborativeSearchBean" />
+				<ref bean="WebAppBean" />
+			</list>
+		</property>
+	</bean>
+	<bean name="CollaborativeSearchBean" class="webseeker.collaborativesearch.CollaborativeSearchBean">
+		<property name="executionInterval" value="4000" />
+		<property name="logLevel" value="INFO" />
+	</bean>
+	
+	
+	<!--MACIEK RATING AGENT  -->
+<!-- 	<bean name="maciek" parent="SimpleAgent">
+		<property name="agentBeans">
+			<list>
+				<ref bean="MaciekBean" />
+				<ref bean="WebAppBean" />
+			</list>
+		</property>
+	</bean>
+	
+	<bean name="MaciekBean" class="webseeker.rating.MaciekBean">
+		<property name="executionInterval" value="4000" />
+		<property name="logLevel" value="INFO" />		
+	</bean> -->
+	
+	
+	
+	<!-- CONFIGUTATION BEANS  -->
+	<!-- This Bean is responsible for placing htmls and js' on WebServer -->
+	<bean name="WebAppBean" class="de.dailab.jiactng.rsga.beans.WebAppServingBean"
+		scope="prototype">
+		<property name="contextPath" value="/webapp" />
+		<property name="resourcePath" value="webapp" />
+	</bean> 
 
 </beans>

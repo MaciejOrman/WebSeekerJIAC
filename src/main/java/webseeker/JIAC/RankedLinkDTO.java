@@ -1,4 +1,4 @@
-package webseeker.JIAC;
+package webseeker.jiac;
 
 
 

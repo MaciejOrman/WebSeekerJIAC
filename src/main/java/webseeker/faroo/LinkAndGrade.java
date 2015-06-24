@@ -1,8 +1,8 @@
 package webseeker.faroo;
 
-import java.io.Serializable;
+import de.dailab.jiactng.agentcore.knowledge.IFact;
 
-public class LinkAndGrade implements Serializable{
+public class LinkAndGrade implements IFact{
 
 	/**
 	 * 

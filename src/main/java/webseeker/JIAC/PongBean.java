@@ -1,4 +1,4 @@
-package webseeker.JIAC;
+package webseeker.jiac;
 
 import java.io.Serializable;
 
@@ -34,7 +34,7 @@ public class PongBean extends AbstractAgentBean {
 			throw new RuntimeException("Send action not found.");
 
 		// listen to memory events, see MessageObserver implementation below
-		memory.attach(new MessageObserver(), new JiacMessage(new Links(null)));
+		//memory.attach(new MessageObserver(), new JiacMessage(new Links(null)));
 	}
 
 	@SuppressWarnings("serial")
@@ -50,14 +50,14 @@ public class PongBean extends AbstractAgentBean {
 
 				// consume message
 				IJiacMessage message = memory.remove(wce.getObject());
-				System.out.println("--------------received message"+(Links)message.getPayload());
+				//System.out.println("--------------received message"+(Links)message.getPayload());
 				// create answer: a JiacMessage holding a Ping with message 'pong'
-				JiacMessage pongMessage = new JiacMessage(new Links(null));
+				//JiacMessage pongMessage = new JiacMessage(new Links(null));
 
 				// send Pong to PingAgent (the sender of the original message)
 				log.info("PongAgent - sending pong message");
-				invoke(sendAction, new Serializable[] { pongMessage,
-						message.getSender() });
+				/*invoke(sendAction, new Serializable[] { pongMessage,
+						message.getSender() });*/
 			}
 		}
 	}

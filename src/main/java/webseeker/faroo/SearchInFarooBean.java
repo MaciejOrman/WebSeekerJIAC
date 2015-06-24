@@ -13,11 +13,15 @@ import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 
+import webseeker.rating.DynamicAgentsCreation;
+import webseeker.rating.RatingBean;
+
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 
 import de.dailab.jiactng.agentcore.action.scope.ActionScope;
+import de.dailab.jiactng.agentcore.lifecycle.LifecycleException;
 import de.dailab.jiactng.rsga.beans.AbstractRESTfulAgentBean;
 
 public class SearchInFarooBean extends AbstractRESTfulAgentBean {
@@ -28,6 +32,19 @@ public class SearchInFarooBean extends AbstractRESTfulAgentBean {
 	public ReccomendedLinks search(String nick, String query)
 			throws UnirestException {
 			if (nick != null && query != null) {
+				
+				//dynamic agent creation
+				DynamicAgentsCreation dynamicAgentsCreation = new DynamicAgentsCreation();
+				
+				try {
+					dynamicAgentsCreation.addAgent(nick, 1000,new RatingBean());
+				} catch (LifecycleException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				return searchInFaroo(query, nick);
 			}
 		return null;
@@ -53,14 +70,15 @@ public class SearchInFarooBean extends AbstractRESTfulAgentBean {
 			ReccomendedLinks reccomendedLinks = new ReccomendedLinks();
 			reccomendedLinks.setNick(nick);
 			LinkAndGrade linkAndGrade;
-			LinkAndGrade[] linksAndGrades = new LinkAndGrade[farooLinks.getLength()];
+			//LinkAndGrade[] linksAndGrades = new LinkAndGrade[farooLinks.getLength()];
+			List<LinkAndGrade> linksAndGrades = new ArrayList<LinkAndGrade>();
 
 			//for (Link farooLink : farooLinks.getResults()) {
 			for(int i =0; i<farooLinks.getLength();i++){
 				FarooLink farooLink = farooLinks.getResults().get(i);
 				linkAndGrade = new LinkAndGrade(farooLink.getTitle(),
 						farooLink.getUrl(), farooLink.getKwic());
-				linksAndGrades[i]= linkAndGrade;
+				linksAndGrades.add(linkAndGrade);
 			}
 			reccomendedLinks.setLinksAndGrades(linksAndGrades);
 			reccomendedLinks.setQuery(query);
@@ -81,10 +99,10 @@ public class SearchInFarooBean extends AbstractRESTfulAgentBean {
 	@Override
 	public void doStart() throws Exception {
 		super.doStart();
-		log.info("TestAgentBean - starting....");
-		log.info("TestAgentBean - my ID: " + this.thisAgent.getAgentId());
-		log.info("TestAgentBean - my Name: " + this.thisAgent.getAgentName());
-		log.info("TestAgentBean - my Node: "
+		log.info("SearchInFarooAgentBean - starting....");
+		log.info("SearchInFarooAgentBean - my ID: " + this.thisAgent.getAgentId());
+		log.info("SearchInFarooAgentBean - my Name: " + this.thisAgent.getAgentName());
+		log.info("SearchInFarooAgentBean - my Node: "
 				+ this.thisAgent.getAgentNode().getName());
 	}
 

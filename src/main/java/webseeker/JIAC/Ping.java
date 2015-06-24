@@ -1,4 +1,4 @@
-package webseeker.JIAC;
+package webseeker.jiac;
 
 import de.dailab.jiactng.agentcore.knowledge.IFact;
 

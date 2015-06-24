@@ -1,4 +1,4 @@
-package webseeker.JIAC;
+package webseeker.jiac;
 
 import java.io.Serializable;
 
@@ -82,10 +82,11 @@ public class RankedLink implements Serializable{
 
 	@Override
 	public String toString() {
-		return "RankedLink [username=" + username + ", url="
-				+ url + ", query=" + query + ", title=" + title + ", kwic="
-				+ kwic + ", grade=" + grade + "]";
+		return " username=" + username + ", url=" + url + ", grade="
+				+ grade + " ";
 	}
+
+
 
 
 	

@@ -1,4 +1,4 @@
-package webseeker.JIAC;
+package webseeker.jiac;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
