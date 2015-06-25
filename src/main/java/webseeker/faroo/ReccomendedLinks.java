@@ -13,34 +13,19 @@ public class ReccomendedLinks implements IFact{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private String nick;
-	private String query;
 	private List<LinkAndGrade> linksAndGrades;
 	
 	public ReccomendedLinks(){
 
-	}
-	public String getNick() {
-		return nick;
 	}
 	
 
 	public ReccomendedLinks(String nick, String query,
 			List<LinkAndGrade> linksAndGrades) {
 		super();
-		this.nick = nick;
-		this.query = query;
 		this.linksAndGrades = linksAndGrades;
 	}
-	public void setNick(String nick) {
-		this.nick = nick;
-	}
-	public String getQuery() {
-		return query;
-	}
-	public void setQuery(String query) {
-		this.query = query;
-	}
+
 	public List<LinkAndGrade> getLinksAndGrades() {
 		return linksAndGrades;
 	}
@@ -49,7 +34,7 @@ public class ReccomendedLinks implements IFact{
 	}
 	@Override
 	public String toString() {
-		return "ReccomendedLinks [nick=" + nick + ", query=" + query
+		return "ReccomendedLinks ["
 				+ ", linksAndGrades=" + linksAndGrades + "]";
 	}
 

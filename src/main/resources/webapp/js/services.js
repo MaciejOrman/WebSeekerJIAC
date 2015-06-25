@@ -18,22 +18,6 @@ sModule.service('linkService', function($rootScope,$http, $q){
 				return deferred.promise;
 		}
 		
-		this.getMeanSortedLinks = function(query1, nick1){
-			var deferred = $q.defer();
-			$http.post('/meanratesearch', {query:  query1, nick: nick1 }).success(function(data) {
-			    			  deferred.resolve(data);
-			    		  }).
-			    		  error(function(data, status, headers, config) {
-			    			  alert(data);
-			    				$rootScope.errorMessage = data;
-			    				$rootScope.showErrorMessage = true;
-			    				deferred.reject(data);
-			    		  });
-				return deferred.promise;
-			
-			
-		}
-		
 		this.getCollSortedLinks = function(query1, nick1){
 			var deferred = $q.defer();
 			$http.post('/CollaborativeSearchAgent/collsearch?nick='+nick1+"&query="+query1).success(function(data) {
@@ -50,9 +34,9 @@ sModule.service('linkService', function($rootScope,$http, $q){
 			
 		}
 			
-		this.sendGrades = function(grades1){
+		this.sendGrades = function(grades1, nick){
 			var deferred = $q.defer();
-			$http.post('/'+grades1.nick+'/grades', grades1).success(function(data) {
+			$http.post('/'+nick+'/grades', grades1).success(function(data) {
 				console.log(grades1);
 	  			  deferred.resolve(grades1);
 	  		  }).

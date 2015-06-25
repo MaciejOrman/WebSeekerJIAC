@@ -13,6 +13,8 @@ public class LinkAndGrade implements IFact{
 	private String kwic;
 	private int grade;
 	private double meanGrade;
+	private String nick;
+	private String query;
 	public LinkAndGrade() {}
 	
 	public LinkAndGrade(String title, String url, String kwic) {
@@ -62,6 +64,22 @@ public class LinkAndGrade implements IFact{
 
 	public void setMeanGrade(double meanGrade) {
 		this.meanGrade = meanGrade;
+	}
+
+	public String getNick() {
+		return nick;
+	}
+
+	public void setNick(String nick) {
+		this.nick = nick;
+	}
+
+	public String getQuery() {
+		return query;
+	}
+
+	public void setQuery(String query) {
+		this.query = query;
 	}
 	
 	

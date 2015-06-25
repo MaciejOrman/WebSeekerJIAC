@@ -7,9 +7,9 @@
 	<import resource="classpath:de/dailab/jiactng/agentcore/conf/Agent.xml" />
 	<import resource="classpath:de/dailab/jiactng/agentcore/conf/JMSMessaging.xml" />
 	<import resource="classpath:de/dailab/jiactng/rsga/conf/rsga.xml" />
-	<import resource="webserver.xml" />
+	<import resource="classpath:de/dailab/jiactng/basicservices/webserver/conf/webserver.xml" />
 
-
+	<!-- WEB SEEKER NODE  -->
 	<bean name="WebSeekerNode" parent="NodeWithJMX">
 		<property name="agentNodeBeans">
 			<list>
@@ -22,13 +22,10 @@
 			<list>
 				<ref bean="RESTfulProviderAgent" /> <!-- Lets making HTTP requests to WebServer -->
 				<ref bean="SearchInFarooAgent" />
-				<!-- <ref bean="maciek"/> -->
 				<ref bean="CollaborativeSearchAgent"/>
 			</list>
 		</property>
 	</bean>
-
-
 
 	<!--FAROO SEARCH AGENT  -->
 	<bean name="SearchInFarooAgent" parent="SimpleAgent">
@@ -56,25 +53,7 @@
 	<bean name="CollaborativeSearchBean" class="webseeker.collaborativesearch.CollaborativeSearchBean">
 		<property name="executionInterval" value="4000" />
 		<property name="logLevel" value="INFO" />
-	</bean>
-	
-	
-	<!--MACIEK RATING AGENT  -->
-<!-- 	<bean name="maciek" parent="SimpleAgent">
-		<property name="agentBeans">
-			<list>
-				<ref bean="MaciekBean" />
-				<ref bean="WebAppBean" />
-			</list>
-		</property>
-	</bean>
-	
-	<bean name="MaciekBean" class="webseeker.rating.MaciekBean">
-		<property name="executionInterval" value="4000" />
-		<property name="logLevel" value="INFO" />		
-	</bean> -->
-	
-	
+	</bean>	
 	
 	<!-- CONFIGUTATION BEANS  -->
 	<!-- This Bean is responsible for placing htmls and js' on WebServer -->

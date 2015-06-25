@@ -68,7 +68,7 @@ public class SearchInFarooBean extends AbstractRESTfulAgentBean {
 			FarooResults farooLinks = mapper.readValue(response.getBody(),
 					FarooResults.class);
 			ReccomendedLinks reccomendedLinks = new ReccomendedLinks();
-			reccomendedLinks.setNick(nick);
+			//reccomendedLinks.setNick(nick);
 			LinkAndGrade linkAndGrade;
 			//LinkAndGrade[] linksAndGrades = new LinkAndGrade[farooLinks.getLength()];
 			List<LinkAndGrade> linksAndGrades = new ArrayList<LinkAndGrade>();
@@ -78,10 +78,11 @@ public class SearchInFarooBean extends AbstractRESTfulAgentBean {
 				FarooLink farooLink = farooLinks.getResults().get(i);
 				linkAndGrade = new LinkAndGrade(farooLink.getTitle(),
 						farooLink.getUrl(), farooLink.getKwic());
+				linkAndGrade.setNick(nick);
+				linkAndGrade.setQuery(query);
 				linksAndGrades.add(linkAndGrade);
 			}
 			reccomendedLinks.setLinksAndGrades(linksAndGrades);
-			reccomendedLinks.setQuery(query);
 			//System.out.println(reccomendedLinks);
 
 			return reccomendedLinks;

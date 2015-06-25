@@ -39,7 +39,7 @@ public class RatingBean extends AbstractRESTfulAgentBean {
 		for(LinkAndGrade linkAndGrade: reccomendedLinks.getLinksAndGrades()) {
 			int grade =linkAndGrade.getGrade();
 			if(grade!=-1) {
-				rankedLink = new RankedLink(reccomendedLinks.getNick(), linkAndGrade.getTitle(), linkAndGrade.getUrl(), linkAndGrade.getKwic(), grade, reccomendedLinks.getQuery());
+				rankedLink = new RankedLink(linkAndGrade.getNick(), linkAndGrade.getTitle(), linkAndGrade.getUrl(), linkAndGrade.getKwic(), grade, linkAndGrade.getQuery());
 				rankedLinks.add(rankedLink);
 			}
 		}
@@ -110,13 +110,15 @@ public class RatingBean extends AbstractRESTfulAgentBean {
 		System.out.println(thisAgent.getAgentName());
 		
 		Links links= memory.read(new Links(new ArrayList<RankedLink>()));
-		System.out.println("Read links:"+links);
+		//System.out.println("Read links:"+links);
 		List<RankedLink> matchingRankedLinks = new ArrayList<RankedLink>();
 		Links matchingLinks = null;
 		if(links!=null){
 			for(RankedLink link:links.getLinks()){
-				if(link.getQuery().equals(query)){
+				if(link.getQuery().toUpperCase().contains(query.toUpperCase()) ||
+						query.toUpperCase().contains(link.getQuery().toUpperCase())){
 					matchingRankedLinks.add(link);
+					System.out.println("Matching link: "+link);
 				}
 			}	
 			matchingLinks = new Links(matchingRankedLinks);

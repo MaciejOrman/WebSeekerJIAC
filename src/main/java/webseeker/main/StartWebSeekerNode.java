@@ -5,7 +5,7 @@ import webseeker.rating.DynamicAgentsCreation;
 
 
 
-public class StartWebSeeker {
+public class StartWebSeekerNode {
 
 	public static void main(String[] args) {
 		
